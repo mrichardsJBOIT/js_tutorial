@@ -15,18 +15,20 @@ I never writ, nor no man ever loved.`;
 
 console.log(sonnet)
 
-let uniques = {};
-let words = sonnet.match(/\w+/g);
+let uniques = new Map();
+// uniques.set("loved",0);
+
+// let currentValue = uniques.get("loved");
+
+let words = sonnet.match(/[\w']+/g);
 
 for (let i =0; i< words.length; i++) {
   let word = words[i];
-  if (uniques[word]) {
-    // console.log(`Old word: ${word}`);
-    uniques[word] +=1;
+  let currentValue = uniques.get(word);
+  if (currentValue) {
+   uniques.set(word,currentValue+1)
   } else {
-    // console.log(`New word: ${word}`);
-    uniques[word] =1;
+   uniques.set(word,1)
   }
-  // console.log(uniques[word]);
 }
 console.log(uniques);

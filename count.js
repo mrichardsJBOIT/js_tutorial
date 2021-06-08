@@ -16,10 +16,6 @@ I never writ, nor no man ever loved.`;
 console.log(sonnet)
 
 let uniques = new Map();
-// uniques.set("loved",0);
-
-// let currentValue = uniques.get("loved");
-
 let words = sonnet.match(/[\w']+/g);
 
 for (let i =0; i< words.length; i++) {

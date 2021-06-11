@@ -1,12 +1,21 @@
-// Reverses a string.
-function reverse(string) {
-  return Array.from(string).reverse().join("");
+//Add revers to all strigs
+String.prototype.reverse = function reverse() {
+  return Array.from(this).reverse().join("");
 }
 
-
+String.prototype.blank = function blank() {
+  if ( this.length === 0 || this.match(/^\s+$/gm)) {
+    return true;
+  }
+  return false;
+}
 
 function emailParts(email) {
   return email.split("@")
+}
+
+Array.prototype.last = function last() {
+  return this.slice(-1);
 }
 
 
@@ -21,7 +30,7 @@ function Phrase(content) {
 
   //Returns true for a palindrome, false otherwise
   this.palindrome = function palindrome() {
-    return this.processedContent() === reverse(this.processedContent());
+    return this.processedContent() === this.processedContent().reverse();
   }
 
   this.louder = function louder() {
@@ -33,16 +42,3 @@ function Phrase(content) {
   }
 
 }
-
-// defines a transalted object.
-function TranslatedPhrase(content, translation) {
-  this.content = content;
-  this.translation = translation;
-
-  //Returns content processed for palindrome testing
-  this.processedContent = function processedContent() {
-    return this.processor(this.translation);
-  }
-}
-
-TranslatedPhrase.prototype = new Phrase();

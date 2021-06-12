@@ -10,11 +10,10 @@ urllib.request(url, { followRedirect: true },function (err, data, res) {
  }
 
  let body = data.toString();
- body.split("\n").forEach(function(line)  {
+ let lines = body.split("\n")
+ let palindromes = lines.filter(line => new Phrase(line).palindrome() );
 
-   let phrase = new Phrase(line);
-   if (phrase.palindrome()) {
-     console.log("palindrome detected:", line);
-   }
+ palindromes.forEach(function(palindrome)  {
+  console.log("palindrome detected:", palindrome);
  });
 });

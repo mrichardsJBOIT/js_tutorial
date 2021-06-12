@@ -3,7 +3,6 @@ let Phrase = require("mrichardsjboit-palindrome");
 
 function palindromeTester(event) {
   event.preventDefault();
-  // let string = prompt("Please enter a string for palindrome testing:");
   let phrase = new Phrase(event.target.phrase.value);
   let palindromeResult = document.querySelector("#palindromeResult");
 
@@ -57,7 +56,12 @@ function Phrase(content) {
 
   //Returns true for a palindrome, false otherwise
   this.palindrome = function palindrome() {
-    return this.processedContent() === this.processedContent().reverse();
+    if (this.letters()) {
+      return this.processedContent() === this.processedContent().reverse();
+    } else {
+      return false;
+    }
+
   }
 
   // returns letters of the contents

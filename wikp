@@ -1,0 +1,37 @@
+#!/home/mark/.nvm/versions/node/v15.5.0/bin/node
+
+//Returns the paragraphs from a Wikipedia link, stripped of reference numbers
+
+let url = process.argv[2];
+
+if (!url) {
+  console.log("Error: no url provided.  Usage: wikp <url>");
+  process.exit(1);
+}
+
+let urllib = require('urllib');
+
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+urllib.request(url, { followRedirect: true },function (err, data, res) {
+  if(err) {
+    throw err;
+  }
+
+  let body = data.toString();
+  // simulate a Document Object Model
+  let { document } = (new JSDOM(body)).window;
+
+  let paragraphs = document.querySelectorAll("p");
+  let references = document.querySelectorAll(".reference");
+
+  references.forEach(function(reference) {
+    reference.remove();
+  });
+
+  paragraphs.forEach(function(paragraph) {
+    console.log(paragraph.textContent);
+  });
+
+});

@@ -1,0 +1,20 @@
+#!/home/mark/.nvm/versions/node/v15.5.0/bin/node
+
+let Phrase = require("mrichardsjboit-palindrome");
+let urllib = require('urllib');
+let url = 'https://cdn.learnenough.com/phrases.txt';
+
+urllib.request(url, { followRedirect: true },function (err, data, res) {
+ if(err) {
+   throw err;
+ }
+
+ let body = data.toString();
+ body.split("\n").forEach(function(line)  {
+
+   let phrase = new Phrase(line);
+   if (phrase.palindrome()) {
+     console.log("palindrome detected:", line);
+   }
+ });
+});

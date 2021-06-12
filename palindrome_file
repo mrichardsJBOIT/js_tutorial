@@ -1,0 +1,21 @@
+#!/home/mark/.nvm/versions/node/v15.5.0/bin/node
+
+let fs = require("fs");
+let Phrase = require("mrichardsjboit-palindrome");
+
+let text = fs.readFileSync("phrases.txt","utf-8");
+let palindromeFileName = "palindromes.txt";
+
+text.split("\n").forEach(function(line)  {
+
+  let phrase = new Phrase(line);
+  if (phrase.palindrome()) {
+    fs.writeFile(palindromeFileName, line+"\n", { flag: 'a+' },  err => {
+      if (err) {
+        console.error(err);
+        return
+      }
+    });
+    console.log("palindrome detected:", line);
+  }
+});
